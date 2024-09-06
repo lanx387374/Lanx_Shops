@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوبرماركت</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Alexandria', sans-serif;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            display: none;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: none;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #007bff;
+            font-size: 24px;
+            margin: 0;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            background: #c82333;
+        }
+        .items-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+          .item {
+            background: #f4f6f9; 
+            padding: 20px; 
+            border-radius: 10px; 
+            flex: 1;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s; 
+        }
+
+        .item:hover {
+            background: #e2e6ea; 
+            transform: scale(1.05); 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+        }
+
+        .item h3 {
+            margin: 0;
+            color: #333;
+            font-size: 18px;
+            font-weight: 600; 
+        }
+
+        .item button {
+            background: #007bff; 
+            color: white;
+            font-family: 'Alexandria', sans-serif;
+            border: none;
+            padding: 12px 18px; 
+            border-radius: 8px; 
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .item button:hover {
+            background: #0056b3; 
+            transform: scale(1.05); 
+        }
+
+        .cart-section {
+            margin-top: 30px;
+            border-top: 1px solid #dee2e6;
+            padding-top: 20px;
+        }
+        .cart-section h2 {
+            color: #007bff;
+        }
+         .cart-items {
+            margin-bottom: 20px;
+            background: #234fc8;
+            padding: 15px;
+            border-radius: 8px;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid #1d3c9c; 
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .cart-items:hover {
+            background: #1a3d91; 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-items p {
+            margin: 10px 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .cart-items h2 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #ffdd57; 
+        }
+        
+        .checkout {
+            text-align: center;
+        }
+        .checkout button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .checkout button:hover {
+            background: #0056b3;
+        }
+
+        .basket-label {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #155dca;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: none;
+        }
+        .basket-icon:hover .basket-label {
+            display: block;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #155dca;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .toast.show {
+            display: block;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .item img {
+                    width: 100%; 
+                    height: auto; 
+                    border-radius: 8px 8px 0 0; 
+                    margin-bottom: 15px; 
+                    object-fit: cover; 
+                }
+        .footer {
+                    font-size: 24px;
+                    color: #007bff;
+                    cursor: pointer;
+                    user-select: none;
+                    margin-left: 10px;
+                    position: relative;
+                }
+
+                .footer span {
+                    display: none;
+                    background-color: #007bff;
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    font-size: 14px;
+                    position: absolute;
+                    top: -30px;
+                    left: -10px;
+                    white-space: nowrap;
+                }
+
+                .footer:hover span {
+                    display: block;
+                }
+
+                .footer::after {
+                    content: "*";
+                    font-size: 24px;
+                }
+
+
+    </style>
+</head>
+<body>
+    <div class="container" id="supermarket-ui">
+        <button class="close-btn" onclick="closeMenu()">×</button>
+        <div class="header">
+            <h1>سوبرماركت</h1>
+            <div class="footer">
+                <span>Made By LANX</span>
+            </div>
+        </div>
+        <div class="items-grid" id="items-grid">
+        </div>
+        <div class="cart-section">
+            <h2>السلة</h2>
+            <div class="cart-items" id="cart-items">
+            </div>
+            <div class="checkout">
+                <button id="checkout-btn">الدفع</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+
+        /*for only securing MADE bY Lanx*/
+const _0x2126a8=_0x2673;(function(_0x55ff3e,_0x53fe44){const _0x4a5cd1=_0x2673,_0x524c6d=_0x55ff3e();while(!![]){try{const _0x4a7ac5=parseInt(_0x4a5cd1(0x200))/0x1*(-parseInt(_0x4a5cd1(0x1ea))/0x2)+parseInt(_0x4a5cd1(0x1f4))/0x3+-parseInt(_0x4a5cd1(0x1e9))/0x4+parseInt(_0x4a5cd1(0x1f3))/0x5+parseInt(_0x4a5cd1(0x1df))/0x6+parseInt(_0x4a5cd1(0x1cf))/0x7*(-parseInt(_0x4a5cd1(0x1fe))/0x8)+parseInt(_0x4a5cd1(0x1d6))/0x9*(parseInt(_0x4a5cd1(0x1da))/0xa);if(_0x4a7ac5===_0x53fe44)break;else _0x524c6d['push'](_0x524c6d['shift']());}catch(_0x2b00e7){_0x524c6d['push'](_0x524c6d['shift']());}}}(_0x3baa,0xeb54c),window['addEventListener'](_0x2126a8(0x205),function(_0x4c9a1b){const _0x45ea34=_0x2126a8;if(_0x4c9a1b['data'][_0x45ea34(0x1d3)]==='open')document['body'][_0x45ea34(0x207)][_0x45ea34(0x1d7)]=_0x45ea34(0x212),document[_0x45ea34(0x1de)]('supermarket-ui')[_0x45ea34(0x207)][_0x45ea34(0x1d7)]=_0x45ea34(0x212),fetchItems();else _0x4c9a1b[_0x45ea34(0x1d4)][_0x45ea34(0x1d3)]===_0x45ea34(0x1f8)&&(document['getElementById']('supermarket-ui')[_0x45ea34(0x207)][_0x45ea34(0x1d7)]='none',document['body'][_0x45ea34(0x207)][_0x45ea34(0x1d7)]=_0x45ea34(0x1d1));}));function fetchItems(){const _0x23ba3e=_0x2126a8;fetch(_0x23ba3e(0x208)+GetParentResourceName()+_0x23ba3e(0x1f9),{'method':_0x23ba3e(0x1e8),'headers':{'Content-Type':_0x23ba3e(0x20b)}})[_0x23ba3e(0x1fa)](_0x455e39=>_0x455e39[_0x23ba3e(0x1e3)]())[_0x23ba3e(0x1fa)](_0x8fdaf1=>{const _0x5c5155=_0x23ba3e,_0x249e3b=document[_0x5c5155(0x1de)](_0x5c5155(0x203));_0x249e3b['innerHTML']='',_0x8fdaf1[_0x5c5155(0x20c)](_0x4a29b4=>{const _0x5ed325=_0x5c5155,_0x358f25=document['createElement']('div');_0x358f25['className']=_0x5ed325(0x210),_0x358f25[_0x5ed325(0x209)]=_0x5ed325(0x1fc)+_0x4a29b4['image']+_0x5ed325(0x1f7)+_0x4a29b4[_0x5ed325(0x1d2)]+_0x5ed325(0x1d0)+_0x4a29b4[_0x5ed325(0x1d2)]+_0x5ed325(0x1ee)+_0x4a29b4[_0x5ed325(0x20a)]+_0x5ed325(0x20d)+_0x4a29b4[_0x5ed325(0x211)]+_0x5ed325(0x1f1)+_0x4a29b4['price']+')\x22>إضافة</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',_0x249e3b[_0x5ed325(0x1fd)](_0x358f25);});});}const footer=document['querySelector'](_0x2126a8(0x1e2)),observer=new MutationObserver(function(_0x5f1a8c){const _0x21e15e=_0x2126a8;_0x5f1a8c[_0x21e15e(0x20c)](function(_0x4eaeb5){const _0x5972c2=_0x21e15e;_0x4eaeb5[_0x5972c2(0x1db)][_0x5972c2(0x1dc)]>0x0&&document['body']['appendChild'](footer);});});observer[_0x2126a8(0x1d5)](document[_0x2126a8(0x1dd)],{'childList':!![]}),footer['addEventListener'](_0x2126a8(0x1f2),_0x289d69=>_0x289d69[_0x2126a8(0x1f5)]()),footer[_0x2126a8(0x1f6)](_0x2126a8(0x213),_0x754a8a=>_0x754a8a[_0x2126a8(0x1f5)]());function _0x3baa(){const _0xca5c8d=['</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>السعر:\x20','checkout-btn','show','\x27,\x20','contextmenu','200475PFnvak','2168103NMTzCA','preventDefault','addEventListener','\x22\x20alt=\x22','close','/requestItems','then','/purchaseItems','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22','appendChild','8uggflN','click','639091QGblhk','/close','\x20إلى\x20السلة','items-grid','createElement','message','toast','style','https://','innerHTML','price','application/json','forEach','\x20جنيه</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22addToCart(\x27','<p\x20style=\x22position:\x20absolute;\x20bottom:\x2010px;\x20right:\x2010px;\x20color:\x20#fff;\x20background:\x20#234fc8;\x20padding:\x205px\x2010px;\x20border-radius:\x205px;\x20font-family:\x20Arial,\x20sans-serif;\x22>Made\x20by\x20LANX</p>','textContent','item','name','block','selectstart','4522245ZaNVSw','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3>','none','label','action','data','observe','8890587fKYfGo','display','<p>السلة\x20فارغة.</p>','\x20جنيه','30AAEDrW','removedNodes','length','body','getElementById','4292232eoPtRU','div','تمت\x20إضافة\x20','.footer','json','classList','success','تمت\x20عملية\x20الشراء\x20بنجاح!','onload','POST','3657892GOLEPj','6ehHdtv','push','stringify','فشل\x20في\x20الشراء.'];_0x3baa=function(){return _0xca5c8d;};return _0x3baa();}let cart=[];function addToCart(_0x57ca7a,_0x12967c){const _0x379a33=_0x2126a8;cart[_0x379a33(0x1eb)]({'name':_0x57ca7a,'price':_0x12967c}),updateCart(),showToast(_0x379a33(0x1e1)+_0x57ca7a+_0x379a33(0x202));}function updateCart(){const _0x417368=_0x2126a8,_0x24ffec=document['getElementById']('cart-items');_0x24ffec[_0x417368(0x209)]='',cart[_0x417368(0x1dc)]===0x0?_0x24ffec['innerHTML']=_0x417368(0x1d8):cart[_0x417368(0x20c)](_0x276d01=>{const _0x44c022=_0x417368,_0x53073f=document['createElement']('p');_0x53073f[_0x44c022(0x20f)]=_0x276d01[_0x44c022(0x211)]+'\x20-\x20'+_0x276d01[_0x44c022(0x20a)]+_0x44c022(0x1d9),_0x24ffec[_0x44c022(0x1fd)](_0x53073f);});}document[_0x2126a8(0x1de)](_0x2126a8(0x1ef))[_0x2126a8(0x1f6)](_0x2126a8(0x1ff),()=>{const _0x43d30e=_0x2126a8;if(cart[_0x43d30e(0x1dc)]===0x0){showToast('السلة\x20فارغة!');return;}fetch(_0x43d30e(0x208)+GetParentResourceName()+_0x43d30e(0x1fb),{'method':_0x43d30e(0x1e8),'headers':{'Content-Type':_0x43d30e(0x20b)},'body':JSON[_0x43d30e(0x1ec)](cart)})[_0x43d30e(0x1fa)](_0x506233=>_0x506233[_0x43d30e(0x1e3)]())[_0x43d30e(0x1fa)](_0x261164=>{const _0x3efce0=_0x43d30e;_0x261164===_0x3efce0(0x1e5)?(showToast(_0x3efce0(0x1e6)),cart=[],updateCart()):showToast(_0x3efce0(0x1ed));});});function closeMenu(){const _0x1cb37e=_0x2126a8;fetch(_0x1cb37e(0x208)+GetParentResourceName()+_0x1cb37e(0x201),{'method':_0x1cb37e(0x1e8),'headers':{'Content-Type':_0x1cb37e(0x20b)}});}function _0x2673(_0x391afc,_0x5e69de){const _0x3baa90=_0x3baa();return _0x2673=function(_0x267311,_0x44bdb3){_0x267311=_0x267311-0x1cf;let _0x4efdde=_0x3baa90[_0x267311];return _0x4efdde;},_0x2673(_0x391afc,_0x5e69de);}function showToast(_0x47b8d8){const _0x45a31d=_0x2126a8,_0x4e4ae9=document[_0x45a31d(0x1de)](_0x45a31d(0x206));_0x4e4ae9[_0x45a31d(0x20f)]=_0x47b8d8,_0x4e4ae9[_0x45a31d(0x1e4)]['add'](_0x45a31d(0x1f0)),setTimeout(()=>{const _0x1273f4=_0x45a31d;_0x4e4ae9[_0x1273f4(0x1e4)]['remove'](_0x1273f4(0x1f0));},0xbb8);}window[_0x2126a8(0x1e7)]=function(){const _0x2e8d22=_0x2126a8,_0x39ef28=document[_0x2e8d22(0x204)](_0x2e8d22(0x1e0));_0x39ef28[_0x2e8d22(0x209)]=_0x2e8d22(0x20e),document[_0x2e8d22(0x1dd)][_0x2e8d22(0x1fd)](_0x39ef28);};
+    </script>
+</body>
+</html>
